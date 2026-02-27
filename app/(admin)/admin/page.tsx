@@ -1,15 +1,27 @@
+// 一覧（管理者）
 'use client'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { PostType } from './_types/post'
+
+export type Post = {
+  id: number
+  content: string
+  createdAt: string
+  postCategories: {
+    category: {
+      id: number
+      name: string
+    }
+  }[]
+}
 
 export default function Home() {
-  const [posts, setPosts] = useState<PostType[]>([])
+  const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getAllPosts = async () => {
-      const res = await fetch('/api/posts')  // ここでroute.tsのGETリクエストをよぶ
+      const res = await fetch('/api/admin/posts')
       const data = await res.json()
       setPosts(data.posts)
       setLoading(false)
@@ -28,7 +40,7 @@ export default function Home() {
           className='border border-gray-300 max-w-3xl mx-auto my-5'
         >
           <Link
-            href={`/posts/${post.id}`}
+            href={`/admin/posts/${post.id}`}
           >
             <div className='flex justify-between mx-4 my-4'>
               <div>{post.createdAt}</div>
