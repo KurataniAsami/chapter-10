@@ -3,11 +3,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
-type Category = {
-  id: number,
-  name: string
-}
+import { CreateCategoryRequestBody } from '@/api/admin/categories/route'
 
 export default function CreateCategoryPage() {
   const router = useRouter()
