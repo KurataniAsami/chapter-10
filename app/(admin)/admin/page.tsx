@@ -2,21 +2,10 @@
 'use client'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-export type Post = {
-  id: number
-  content: string
-  createdAt: string
-  postCategories: {
-    category: {
-      id: number
-      name: string
-    }
-  }[]
-}
+import { PostsIndexResponse } from '@/api/posts/route'
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([])
+  const [posts, setPosts] = useState<PostsIndexResponse["posts"]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -34,6 +23,15 @@ export default function Home() {
   if (posts.length === 0) return <p>記事が見つかりません</p>
 
   return (
+    <div>
+      <div className='flex justify-between'>
+        <h1 className="text-2xl font-bold mb-6">記事一覧</h1>
+        <Link href={'/admin/new'}
+          className="bg-blue-500 text-white p-2"
+        >
+          新規記事作成
+        </Link>
+      </div>
     <ul>
       {posts.map((post) => (
         <li key={post.id}
@@ -59,5 +57,6 @@ export default function Home() {
         </li>
       ))}
     </ul>
+    </div>
   );
 }

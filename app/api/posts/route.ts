@@ -1,5 +1,5 @@
 // 記事一覧取得API
-import { prisma } from '../../src/_lib/prisma'
+import { prisma } from '../../_libs/prisma'
 import { NextResponse } from 'next/server'
 
 export type PostsIndexResponse = {

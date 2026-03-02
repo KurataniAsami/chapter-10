@@ -1,21 +1,10 @@
 'use client'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-export type Post = {
-  id: number
-  content: string
-  createdAt: string
-  postCategories: {
-    category: {
-      id: number
-      name: string
-    }
-  }[]
-}
+import { PostShowResponse } from '@/api/posts/[id]/route';
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([])
+  const [posts, setPosts] = useState<PostShowResponse["post"][]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

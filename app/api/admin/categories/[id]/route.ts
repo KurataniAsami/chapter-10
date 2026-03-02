@@ -1,4 +1,4 @@
-import { prisma } from '../../../../src/_lib/prisma'
+import { prisma } from '../../../../_libs/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
 // カテゴリー詳細API

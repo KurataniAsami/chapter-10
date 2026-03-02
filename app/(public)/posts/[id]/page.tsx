@@ -1,10 +1,10 @@
-// 記事詳細ページ（管理者）
+// 記事詳細ページ
 'use client'
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image'
 import { PostType } from '@/_types/post'
-import { PostShowResponse } from '../../../../api/admin/posts/[id]/route';
+import { PostShowResponse } from '../../../api/posts/[id]/route';
 import Link from 'next/link';
 
 const PostDetail = () => {
@@ -16,7 +16,7 @@ const PostDetail = () => {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const response = await fetch(`/api/admin/posts/${id}`)
+        const response = await fetch(`/api/posts/${id}`)
         const data = await response.json()
         setPost(data.post)
       } catch {
@@ -66,24 +66,6 @@ const PostDetail = () => {
             <>{postCategory.category.name}</>
           </span>
         ))}
-      </div>
-
-      <Link
-        href={`/admin/posts/${post.id}/edit`}
-        className="bg-black text-white px-4 py-2 rounded mr-3"
-      >
-        編集
-      </Link>
-      <Link
-        href={`/admin/posts/${post.id}/delete`}
-        className="bg-red-500 text-white px-4 py-2 rounded mt-4"
-      >
-        削除
-      </Link>
-      <div className='mt-3'>
-        <Link href={'./'}>
-          一覧に戻る
-        </Link>
       </div>
     </div>
   )
