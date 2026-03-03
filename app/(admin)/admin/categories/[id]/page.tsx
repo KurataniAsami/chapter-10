@@ -82,5 +82,5 @@ const CategoryDetail = () => {
   )
 }
 
-export default PostDetail
+export default CategoryDetail
 
