@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { UpdateCategoryRequestBody } from "@/api/admin/categories/[id]/route"
-import { CategoryForm } from '../../../posts/_components/CategoryForm'
+import { CategoryForm } from '../../_components/CategoryForm'
 
 export default function EditCategoryPage() {
   const { id } = useParams<{ id : string}>()
@@ -34,13 +34,15 @@ fetchCategory();
 const handleSubmit = async (e: { preventDefault: () => void }) => {
   e.preventDefault()
 
+  const body: UpdateCategoryRequestBody = {
+    name: category,
+  }
+
   try {
   await fetch(`/api/admin/categories/${id}`, {
     method: 'PUT',  // 上のURLにPUT（更新リクエスト）を送るという意味
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: category,
-    }),
+    body: JSON.stringify(body),
   })
     router.push('/admin/categories')
   } catch (err) {

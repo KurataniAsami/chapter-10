@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { CategoryShowResponse } from '@/api/admin/categories/[id]/route';
 
-const PostDetail = () => {
+const CategoryDetail = () => {
   const [category, setCategory] = useState<CategoryShowResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams<{ id: string }>();

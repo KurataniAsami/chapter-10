@@ -4,7 +4,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { CreateCategoryRequestBody } from '@/api/admin/categories/route'
-import { CategoryForm } from '../../posts/_components/CategoryForm'
+import { CategoryForm } from '../_components/CategoryForm'
 
 export default function CreateCategoryPage() {
   const router = useRouter()
@@ -17,11 +17,15 @@ export default function CreateCategoryPage() {
     e.preventDefault()
     setLoading(true)
 
+    const body: CreateCategoryRequestBody = {
+      name: category
+    }
+
     try {
       const res = await fetch('/api/admin/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: category }),
+        body: JSON.stringify(body),
       })
 
       router.push('/admin/categories')
