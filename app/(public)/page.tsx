@@ -1,15 +1,15 @@
 'use client'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { PostType } from './_types/post'
+import { PostShowResponse } from '@/api/posts/[id]/route';
 
 export default function Home() {
-  const [posts, setPosts] = useState<PostType[]>([])
+  const [posts, setPosts] = useState<PostShowResponse["post"][]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getAllPosts = async () => {
-      const res = await fetch('/api/posts')  // ここでroute.tsのGETリクエストをよぶ
+      const res = await fetch('/api/posts')
       const data = await res.json()
       setPosts(data.posts)
       setLoading(false)
