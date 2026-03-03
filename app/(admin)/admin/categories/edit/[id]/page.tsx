@@ -3,7 +3,9 @@
 
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { UpdateCategoryRequestBody } from "@/api/admin/categories/[id]/route"
+import { CategoryForm } from '../../../posts/_components/CategoryForm'
 
 export default function EditCategoryPage() {
   const { id } = useParams<{ id : string}>()
@@ -15,7 +17,7 @@ export default function EditCategoryPage() {
   // 既存カテゴリデータ取得
   useEffect(() => {
   const fetchCategory = async () => {
-    setLoading(true);
+    // setLoading(true);
       try {
         const res = await fetch(`/api/admin/categories/${id}`)  
         const data = await res.json()   
@@ -64,36 +66,21 @@ const handleDelete = async () => {
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">カテゴリー編集</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex flex-col">
-          <label htmlFor="name">{category}</label>
-          <input
-            type="text"
-            id="name"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="border p-2 rounded"
-            placeholder="カテゴリー名を入力してください"
-            required
-            disabled={loading}
-          />
-        </div>
-        
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          disabled={loading}
+      <div className="flex">
+        <CategoryForm
+          category={category}
+          setCategory={setCategory}
+          loading={loading}
+          onSubmit={handleSubmit}
+          mode="edit"
+        />
+        <Link
+          href={`/admin/categories/${id}/delete`}
+          className="bg-red-500 text-white px-4 py-2 rounded mt-4"
         >
-        </button>
-
-        <button
-          type="button"
-          onClick={handleDelete}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          削除する
-        </button>
-      </form>
+          削除
+        </Link>
+      </div>
     </div>
   )
 }

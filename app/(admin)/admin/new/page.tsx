@@ -18,7 +18,6 @@ export default function CreatePage() {
   // 作成処理
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    setLoading(true)
 
     const body: CreatePostRequestBody = {
       title,

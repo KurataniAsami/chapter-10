@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image'
-import { PostType } from '@/_types/post'
 import Link from 'next/link';
+import { CategoryShowResponse } from '@/api/admin/categories/[id]/route';
 
 const PostDetail = () => {
-  const [category, setCategory] = useState<PostType | null>(null);
+  const [category, setCategory] = useState<CategoryShowResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams<{ id: string }>();
   const [error, setError] = useState(false);
@@ -68,16 +68,10 @@ const PostDetail = () => {
       </div>
 
       <Link
-        href={`/admin/posts/${category.id}/edit`}
+        href={`/admin/categories/${category.id}/edit`}
         className="bg-black text-white px-4 py-2 rounded mr-3"
       >
         編集
-      </Link>
-      <Link
-        href={`/admin/posts/${category.id}/delete`}
-        className="bg-red-500 text-white px-4 py-2 rounded mt-4"
-      >
-        削除
       </Link>
       <div className='mt-3'>
         <Link href={'./'}>

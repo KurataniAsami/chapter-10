@@ -44,7 +44,9 @@ export default function EditPostPage() {
       title,
       content,
       thumbnailUrl,
-      categories: [],
+      categories: categories.map((category) => ({
+        id: Number(category.id),
+      })),
     }
 
     try {
