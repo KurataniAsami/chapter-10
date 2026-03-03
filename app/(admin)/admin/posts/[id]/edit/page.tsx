@@ -21,7 +21,6 @@ export default function EditPostPage() {
   //  フォームの情報を取得
   useEffect(() => {
     const fetchPost = async () => {
-      setLoading(true);
       try {
         const res = await fetch(`/api/admin/posts/${id}`)
         const data = await res.json()
