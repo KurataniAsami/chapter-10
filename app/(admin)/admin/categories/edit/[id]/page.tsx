@@ -17,7 +17,6 @@ export default function EditCategoryPage() {
   // 既存カテゴリデータ取得
   useEffect(() => {
   const fetchCategory = async () => {
-    // setLoading(true);
       try {
         const res = await fetch(`/api/admin/categories/${id}`)  
         const data = await res.json()   
